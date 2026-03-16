@@ -3,491 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大型超市区域网设计方案</title>
+    <title>大型超市局域网设计方案</title>
     <style>
-        /* 整体样式优化 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", Arial, sans-serif;
+            font-family: "Microsoft YaHei", sans-serif;
         }
         body {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            line-height: 1.6;
+            background: #f7f8fa;
             color: #333;
-            background-color: #f8f9fa;
+            line-height: 1.7;
         }
         header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #2c3e50;
+            padding: 30px 20px;
+            border-bottom: 3px solid #2c3e50;
+            margin-bottom: 30px;
         }
         h1 {
+            font-size: 32px;
             color: #2c3e50;
             margin-bottom: 10px;
         }
         h2 {
+            font-size: 24px;
             color: #3498db;
             margin: 30px 0 15px;
-            border-left: 5px solid #3498db;
-            padding-left: 10px;
+            padding-left: 12px;
+            border-left: 6px solid #3498db;
         }
         h3 {
+            font-size: 19px;
             color: #2980b9;
             margin: 20px 0 10px;
         }
         p {
             margin: 10px 0;
             text-indent: 2em;
+            font-size: 16px;
         }
-        /* 表格样式优化 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px 15px;
-            text-align: center;
-        }
-        th {
-            background-color: #2c3e50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        /* 图片/拓扑图样式 */
-        svg {
-            margin: 20px 0;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background-color: white;
-            width: 100%;
-            height: auto;
-        }
-        .img-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .img-container img {
-            max-width: 80%;
-            height: auto;
-            border: 1px solid #ddd;
-            padding: 5px;
-        }
-        figcaption {
-            margin-top: 5px;
-            color: #666;
-            font-size: 14px;
-        }
-        /* 导航样式 */
         nav {
-            margin: 20px 0;
-            background-color: #2c3e50;
-            padding: 10px;
-            border-radius: 5px;
+            background: #2c3e50;
+            padding: 12px;
+            border-radius: 6px;
             position: sticky;
             top: 0;
             z-index: 999;
+            text-align: center;
         }
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
-            padding: 5px 10px;
+            margin: 0 10px;
+            padding: 6px 10px;
+            display: inline-block;
         }
         nav a:hover {
-            background-color: #3498db;
-            border-radius: 3px;
+            background: #3498db;
+            border-radius: 4px;
         }
         section {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th,td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: #2c3e50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .img-box {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .img-box img {
+            max-width: 85%;
+            border: 1px solid #ddd;
+            padding: 6px;
+        }
+        .img-box figcaption {
+            margin-top: 8px;
+            color: #666;
+            font-size: 15px;
+        }
+        .list {
+            padding-left: 2.5em;
+            margin: 12px 0;
+        }
+        .list li {
+            margin: 8px 0;
         }
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #777;
+            padding: 30px 20px;
             border-top: 1px solid #ddd;
+            color: #777;
+            margin-top: 40px;
         }
-        /* 设计亮点样式 */
-        .highlight-list {
-            list-style: none;
-            padding-left: 2em;
-        }
-        .highlight-list li {
-            margin: 10px 0;
-            position: relative;
-        }
-        .highlight-list li::before {
-            content: "✓";
-            color: #27ae60;
-            position: absolute;
-            left: -1.5em;
-            font-weight: bold;
-        }
-        /* 移动端适配 */
-        @media (max-width: 768px) {
-            nav a {
-                display: block;
-                margin: 5px 0;
-                text-align: center;
-            }
-            table {
-                font-size: 12px;
-            }
-            .img-container img {
-                max-width: 100%;
-            }
-            h1 {
-                font-size: 24px;
-            }
-            h2 {
-                font-size: 20px;
-            }
+        @media (max-width:768px) {
+            nav a {display:block; margin:6px 0;}
+            .img-box img {max-width:100%}
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>大型超市区域网设计方案</h1>
-        <p>基于核心层-汇聚层-接入层三层架构的网络设计</p>
-    </header>
 
-    <!-- 固定导航栏（滚动时置顶） -->
-    <nav>
-        <a href="#overview">项目概述</a>
-        <a href="#highlight">设计亮点</a>
-        <a href="#topology">网络拓扑</a>
-        <a href="#ip-plan">IP规划</a>
-        <a href="#devices">设备清单</a>
-        <a href="#security">安全设计</a>
-        <a href="#test">测试方案</a>
-    </nav>
+<header>
+    <h1>大型超市局域网设计方案</h1>
+    <p>毕业设计 | 三层网络架构 | 安全隔离 | 高可用部署</p>
+</header>
 
-    <section id="overview">
-        <h2>项目概述</h2>
-        <p>本设计针对大型连锁超市的网络需求，采用“核心层-汇聚层-接入层”三层网络架构，满足收银、办公、仓储、监控等多业务场景的网络需求，兼顾稳定性、可扩展性和安全性。</p>
-        <p>设计目标：保障收银业务高可用（99.99%）、办公网络流畅、监控视频低延迟传输、仓储系统数据安全，同时具备后期扩容能力，可支持超市门店从500㎡扩展至2000㎡的网络需求。</p>
-    </section>
+<nav>
+    <a href="#overview">项目概述</a>
+    <a href="#requirement">需求分析</a>
+    <a href="#overall-design">总体设计</a>
+    <a href="#highlight">设计亮点</a>
+    <a href="#topo">网络拓扑</a>
+    <a href="#ip">IP规划</a>
+    <a href="#device">设备清单</a>
+    <a href="#safe">安全设计</a>
+    <a href="#test">测试方案</a>
+    <a href="#summary">项目总结</a>
+</nav>
 
-    <!-- 新增：设计亮点板块 -->
-    <section id="highlight">
-        <h2>设计亮点</h2>
-        <ul class="highlight-list">
-            <li>三层架构设计：核心层保障转发效率，汇聚层实现业务隔离，接入层适配多终端类型，层次清晰、可扩展性强</li>
-            <li>高可用保障：核心设备双机热备，链路冗余备份，故障切换时间≤50ms，收银业务零中断</li>
-            <li>精细化安全策略：VLAN隔离+802.1X认证+WPA3加密，兼顾内网、外网、无线全场景安全</li>
-            <li>成本与性能平衡：接入层采用PoE交换机，减少布线成本；核心层采用万兆链路，满足高带宽需求</li>
-            <li>完善的测试体系：覆盖带宽、延迟、高可用、安全四大维度，确保网络长期稳定运行</li>
-        </ul>
-    </section>
+<section id="overview">
+    <h2>项目概述</h2>
+    <p>本项目针对大型超市日常运营的网络需求，完成一套完整的局域网设计方案。设计目标是满足收银、办公、仓储、监控、无线等多业务场景的稳定运行，同时保证网络安全、可扩展、易维护。</p>
+    <p>网络采用**核心层-汇聚层-接入层**三层架构，通过VLAN实现业务隔离，通过双机热备提升可靠性，通过防火墙与访问控制实现安全防护，最终形成一套可直接落地实施的超市网络工程方案。</p>
+</section>
 
-    <section id="topology">
-        <h2>网络拓扑图</h2>
-        <p>采用“核心层-汇聚层-接入层”三层架构，确保网络的稳定性和可扩展性，鼠标悬停在设备上可查看功能说明。</p>
-        <!-- 专业SVG拓扑图（带交互提示） -->
-        <svg width="100%" height="400" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
-            <!-- 核心层 -->
-            <rect x="350" y="20" width="200" height="60" rx="5" fill="#2c3e50">
-                <title>核心路由器&核心交换机：双机热备，负责全网路由转发、VLAN终结，万兆上行</title>
-            </rect>
-            <text x="450" y="55" fill="white" text-anchor="middle">核心路由器 & 核心交换机</text>
-            
-            <!-- 汇聚层 -->
-            <rect x="150" y="130" width="120" height="50" rx="5" fill="#3498db">
-                <title>汇聚交换机A：负责收银区/办公区数据汇聚，链路聚合保障带宽</title>
-            </rect>
-            <text x="210" y="160" fill="white" text-anchor="middle">汇聚交换机A</text>
-            
-            <rect x="390" y="130" width="120" height="50" rx="5" fill="#3498db">
-                <title>汇聚交换机B：负责仓储区/监控区数据汇聚，低延迟转发视频流</title>
-            </rect>
-            <text x="450" y="160" fill="white" text-anchor="middle">汇聚交换机B</text>
-            
-            <rect x="630" y="130" width="120" height="50" rx="5" fill="#3498db">
-                <title>汇聚交换机C：负责服务器区/无线AP数据汇聚，高优先级转发业务数据</title>
-            </rect>
-            <text x="690" y="160" fill="white" text-anchor="middle">汇聚交换机C</text>
-            
-            <!-- 接入层及终端 -->
-            <rect x="100" y="240" width="80" height="40" rx="5" fill="#95a5a6">
-                <title>POS收银：高优先级业务，802.1X认证接入，禁止访问外网</title>
-            </rect>
-            <text x="140" y="265" fill="white" text-anchor="middle">POS收银</text>
-            
-            <rect x="220" y="240" width="80" height="40" rx="5" fill="#95a5a6">
-                <title>办公区：OA系统/员工终端，仅允许访问指定外网资源</title>
-            </rect>
-            <text x="260" y="265" fill="white" text-anchor="middle">办公区</text>
-            
-            <rect x="360" y="240" width="80" height="40" rx="5" fill="#95a5a6">
-                <title>仓储区：库存管理系统，与收银区数据互通，禁止访问外网</title>
-            </rect>
-            <text x="400" y="265" fill="white" text-anchor="middle">仓储区</text>
-            
-            <rect x="500" y="240" width="80" height="40" rx="5" fill="#95a5a6">
-                <title>监控区：视频监控流，低延迟转发，存储至服务器区</title>
-            </rect>
-            <text x="540" y="265" fill="white" text-anchor="middle">监控区</text>
-            
-            <rect x="640" y="240" width="80" height="40" rx="5" fill="#95a5a6">
-                <title>服务器区：数据库/应用服务器，仅允许内网指定终端访问</title>
-            </rect>
-            <text x="680" y="265" fill="white" text-anchor="middle">服务器</text>
-            
-            <rect x="760" y="240" width="80" height="40" rx="5" fill="#95a5a6">
-                <title>无线AP：员工/顾客双SSID，顾客网络隔离内网</title>
-            </rect>
-            <text x="800" y="265" fill="white" text-anchor="middle">无线AP</text>
-            
-            <!-- 连接线 -->
-            <line x1="450" y1="80" x2="210" y2="130" stroke="#7f8c8d" stroke-width="2"/>
-            <line x1="450" y1="80" x2="450" y2="130" stroke="#7f8c8d" stroke-width="2"/>
-            <line x1="450" y1="80" x2="690" y2="130" stroke="#7f8c8d" stroke-width="2"/>
-            
-            <line x1="210" y1="180" x2="140" y2="240" stroke="#7f8c8d" stroke-width="2"/>
-            <line x1="210" y1="180" x2="260" y2="240" stroke="#7f8c8d" stroke-width="2"/>
-            <line x1="450" y1="180" x2="400" y2="240" stroke="#7f8c8d" stroke-width="2"/>
-            <line x1="450" y1="180" x2="540" y2="240" stroke="#7f8c8d" stroke-width="2"/>
-            <line x1="690" y1="180" x2="680" y2="240" stroke="#7f8c8d" stroke-width="2"/>
-            <line x1="690" y1="180" x2="800" y2="240" stroke="#7f8c8d" stroke-width="2"/>
-        </svg>
+<section id="requirement">
+    <h2>需求分析</h2>
+    <h3>1. 业务需求</h3>
+    <p>大型超市日常运营包含POS收银、办公OA、仓储管理、视频监控、顾客无线等多业务场景，各业务对网络带宽、延迟、安全性要求不同：</p>
+    <ul class="list">
+        <li>POS收银：高可靠、低延迟，禁止外网访问，保障交易安全</li>
+        <li>办公区：流畅访问OA系统、邮件，可有限访问互联网</li>
+        <li>仓储区：与收银区数据互通，实时更新库存，禁止外网访问</li>
+        <li>监控区：高带宽、低延迟，保障视频流稳定传输</li>
+        <li>顾客无线：隔离内网，仅提供互联网访问</li>
+    </ul>
+    <h3>2. 技术需求</h3>
+    <p>网络需满足：可用性≥99.99%，核心层带宽≥10Gbps，接入层≥1Gbps，VLAN隔离业务，双机热备保障核心设备不中断。</p>
+    <h3>3. 安全需求</h3>
+    <p>边界防护、内网隔离、无线加密、数据备份、运维审计五大安全维度，防止数据泄露与非法访问。</p>
+</section>
 
-        <h3>收银区</h3>
-        <div class="img-container">
-            <img src="cashier.png" alt="收银区网络布局">
-            <figcaption>图1：收银区网络设备布局示意图（PoE交换机+POS终端+备用链路）</figcaption>
-        </div>
+<section id="overall-design">
+    <h2>总体设计</h2>
+    <h3>1. 设计原则</h3>
+    <ul class="list">
+        <li>高可用性：核心设备双机热备，链路冗余，故障快速切换</li>
+        <li>可扩展性：三层架构，支持后期门店扩容、新增业务</li>
+        <li>安全性：VLAN隔离+ACL+802.1X+WPA3，全场景防护</li>
+        <li>经济性：PoE交换机减少布线成本，设备选型兼顾性能与价格</li>
+    </ul>
+    <h3>2. 三层架构</h3>
+    <p>核心层：核心路由器+核心交换机，负责全网数据转发与互联；<br>
+    汇聚层：汇聚交换机，负责接入层数据汇聚与业务隔离；<br>
+    接入层：接入交换机/无线AP，负责终端接入与PoE供电。</p>
+</section>
 
-        <h3>办公区</h3>
-        <div class="img-container">
-            <img src="office.png" alt="办公区网络布局">
-            <figcaption>图2：办公区网络设备布局示意图（无线AP+有线终端+防火墙隔离）</figcaption>
-        </div>
+<section id="highlight">
+    <h2>设计亮点</h2>
+    <ul class="list">
+        <li>三层架构设计：核心层保障转发效率，汇聚层实现业务隔离，接入层适配多终端类型，层次清晰、可扩展性强</li>
+        <li>高可用保障：核心设备双机热备，链路冗余备份，故障切换时间≤50ms，收银业务零中断</li>
+        <li>精细化安全策略：VLAN隔离+802.1X认证+WPA3加密，兼顾内网、外网、无线全场景安全</li>
+        <li>成本与性能平衡：接入层采用PoE交换机，减少布线成本；核心层采用万兆链路，满足高带宽需求</li>
+        <li>完善的测试体系：覆盖带宽、延迟、高可用、安全四大维度，确保网络长期稳定运行</li>
+    </ul>
+</section>
 
-        <h3>仓储区 & 监控中心</h3>
-        <div class="img-container">
-            <img src="warehouse.png" alt="仓储区网络布局">
-            <figcaption>图3：仓储区&监控中心网络布局示意图（工业交换机+摄像头+仓储终端）</figcaption>
-        </div>
-    </section>
+<section id="topo">
+    <h2>网络拓扑结构</h2>
+    <p>整体网络采用分层设计，设备之间采用冗余链路，保证任意单点故障不影响整体业务。</p>
+    
+    <div class="img-box">
+        <img src="topology.png" alt="网络拓扑图">
+        <figcaption>图1：大型超市局域网整体拓扑图</figcaption>
+    </div>
 
-    <section id="ip-plan">
-        <h2>IP地址与VLAN规划</h2>
-        <p>基于业务隔离原则划分VLAN，每个VLAN对应独立网段，避免广播风暴和越权访问：</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>VLAN ID</th>
-                    <th>用途</th>
-                    <th>网段</th>
-                    <th>网关</th>
-                    <th>子网掩码</th>
-                    <th>备注</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>VLAN 10</td>
-                    <td>POS收银区</td>
-                    <td>192.168.10.0/24</td>
-                    <td>192.168.10.1</td>
-                    <td>255.255.255.0</td>
-                    <td>高优先级业务，禁止访问外网</td>
-                </tr>
-                <tr>
-                    <td>VLAN 20</td>
-                    <td>办公区</td>
-                    <td>192.168.20.0/24</td>
-                    <td>192.168.20.1</td>
-                    <td>255.255.255.0</td>
-                    <td>员工办公、OA系统，限定外网访问</td>
-                </tr>
-                <tr>
-                    <td>VLAN 30</td>
-                    <td>仓储区</td>
-                    <td>192.168.30.0/24</td>
-                    <td>192.168.30.1</td>
-                    <td>255.255.255.0</td>
-                    <td>库存管理系统，与收银区互通</td>
-                </tr>
-                <tr>
-                    <td>VLAN 40</td>
-                    <td>监控区</td>
-                    <td>192.168.40.0/24</td>
-                    <td>192.168.40.1</td>
-                    <td>255.255.255.0</td>
-                    <td>视频监控流，低延迟转发</td>
-                </tr>
-                <tr>
-                    <td>VLAN 50</td>
-                    <td>服务器区</td>
-                    <td>192.168.50.0/24</td>
-                    <td>192.168.50.1</td>
-                    <td>255.255.255.0</td>
-                    <td>数据库、应用服务器，仅内网访问</td>
-                </tr>
-                <tr>
-                    <td>VLAN 60</td>
-                    <td>无线AP</td>
-                    <td>192.168.60.0/24</td>
-                    <td>192.168.60.1</td>
-                    <td>255.255.255.0</td>
-                    <td>员工/顾客双SSID，隔离访问</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    <div class="img-box">
+        <img src="cashier.png" alt="收银区">
+        <figcaption>图2：收银区网络布局</figcaption>
+    </div>
 
-    <section id="devices">
-        <h2>核心设备清单</h2>
-        <p>设备选型兼顾性能、成本与兼容性，核心设备采用双机热备提升可用性：</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>设备类型</th>
-                    <th>型号</th>
-                    <th>数量</th>
-                    <th>端口配置</th>
-                    <th>主要功能</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>核心路由器</td>
-                    <td>Cisco ISR 4321</td>
-                    <td>2</td>
-                    <td>2×GE WAN，4×GE LAN</td>
-                    <td>Internet接入、路由转发、双机热备</td>
-                </tr>
-                <tr>
-                    <td>核心交换机</td>
-                    <td>Huawei S5735-S48T4X</td>
-                    <td>2</td>
-                    <td>48×GE电，4×10GE光</td>
-                    <td>三层交换、VLAN终结、链路聚合</td>
-                </tr>
-                <tr>
-                    <td>汇聚交换机</td>
-                    <td>Huawei S5735-L24T4S</td>
-                    <td>4</td>
-                    <td>24×GE电，4×GE光</td>
-                    <td>接入层汇聚、业务隔离、QoS调度</td>
-                </tr>
-                <tr>
-                    <td>接入交换机</td>
-                    <td>Huawei S5720S-28X-SI</td>
-                    <td>12</td>
-                    <td>24×GE电，4×GE光，PoE+</td>
-                    <td>终端接入、PoE供电、802.1X认证</td>
-                </tr>
-                <tr>
-                    <td>防火墙</td>
-                    <td>Hillstone SG-6000-G30</td>
-                    <td>2</td>
-                    <td>16×GE电，8×GE光</td>
-                    <td>安全策略、入侵防御、双机热备</td>
-                </tr>
-                <tr>
-                    <td>无线AP</td>
-                    <td>Huawei AP7060DN</td>
-                    <td>8</td>
-                    <td>2×GE电，Wi-Fi 6</td>
-                    <td>双SSID、WPA3加密、流量隔离</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    <div class="img-box">
+        <img src="office.png" alt="办公区">
+        <figcaption>图3：办公区网络布局</figcaption>
+    </div>
 
-    <section id="security">
-        <h2>网络安全设计</h2>
-        <h3>1. 边界安全</h3>
-        <p>部署双机热备防火墙，配置精细化访问控制列表（ACL）：仅放行收银业务8080端口、办公OA 80/443端口、监控视频流554端口，禁止22、3389、135等高危端口的外网访问；启用入侵防御系统（IPS），拦截SQL注入、DDoS等攻击行为。</p>
-        
-        <h3>2. 内网安全</h3>
-        <p>基于VLAN严格隔离不同业务区域：收银区（VLAN10）仅与服务器区（VLAN50）互通，办公区（VLAN20）禁止访问收银区；接入层交换机启用802.1X认证，绑定终端MAC+IP+端口，防止非法终端接入；核心层配置DHCP Snooping，防止DHCP欺骗攻击。</p>
-        
-        <h3>3. 无线安全</h3>
-        <p>无线AP启用Wi-Fi 6+WPA3-Enterprise加密，划分双SSID：员工SSID（SSID-SM-STAFF）需802.1X认证，可访问内网；顾客SSID（SSID-SM-GUEST）采用Portal认证，仅允许访问互联网，通过ACL隔离内网资源，避免顾客网络攻击内网。</p>
-        
-        <h3>4. 数据安全</h3>
-        <p>服务器区部署数据库审计系统，记录所有数据访问行为；收银数据传输采用HTTPS+AES-256加密，防止数据泄露；制定备份策略：每日增量备份、每周全量备份，备份文件异地存储，保留1个月备份记录。</p>
-        
-        <h3>5. 运维安全</h3>
-        <p>网络设备启用AAA认证，通过Radius服务器统一管理账号密码；设备管理仅允许从运维区（VLAN99）访问，禁用Telnet，强制使用SSH 2.0加密管理；定期更新设备固件和病毒库，每季度进行一次安全漏洞扫描。</p>
-    </section>
+    <div class="img-box">
+        <img src="warehouse.png" alt="仓储监控区">
+        <figcaption>图4：仓储与监控区网络布局</figcaption>
+    </div>
+</section>
 
-    <section id="test">
-        <h2>网络测试方案</h2>
-        <p>测试分为上线前全量测试、上线后常规巡检、季度压力测试三个阶段，覆盖性能、可用性、安全性三大维度：</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>测试维度</th>
-                    <th>测试项</th>
-                    <th>测试方法</th>
-                    <th>预期指标</th>
-                    <th>测试工具</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="2">性能测试</td>
-                    <td>带宽测试</td>
-                    <td>多终端同时向服务器传输10GB文件</td>
-                    <td>核心层≥10Gbps，接入层≥1Gbps，无丢包</td>
-                    <td>iPerf3、Chariot</td>
-                </tr>
-                <tr>
-                    <td>延迟/丢包测试</td>
-                    <td>持续ping网关/服务器（1小时）</td>
-                    <td>收银区延迟≤10ms，监控区≤20ms，丢包率=0</td>
-                    <td>ping、tracert、Wireshark</td>
-                </tr>
-                <tr>
-                    <td>高可用测试</td>
-                    <td>故障切换测试</td>
-                    <td>断开核心交换机主链路/关闭主防火墙</td>
-                    <td>切换时间≤50ms，收银业务不中断</td>
-                    <td>业务模拟工具、ping监控</td>
-                </tr>
-                <tr>
-                    <td rowspan="2">安全测试</td>
-                    <td>边界防护测试</td>
-                    <td>外网模拟端口扫描/DDOS攻击</td>
-                    <td>攻击被拦截，内网无感知</td>
-                    <td>Nmap、Hping3</td>
-                </tr>
-                <tr>
-                    <td>内网隔离测试</td>
-                    <td>办公区尝试访问收银区IP</td>
-                    <td>访问被拒绝，防火墙日志记录告警</td>
-                    <td>Telnet、ping、防火墙日志</td>
-                </tr>
-            </tbody>
-        </table>
-        <p>测试结果记录：所有测试项均需达到预期指标方可上线；上线后每周生成1次网络运行报告，包含带宽利用率、设备负载、安全告警等数据，确保网络长期稳定运行。</p>
-    </section>
+<section id="ip">
+    <h2>IP与VLAN规划</h2>
+    <table>
+        <tr><th>VLAN</th><th>区域</th><th>网段</th><th>网关</th><th>说明</th></tr>
+        <tr><td>10</td><td>收银区</td><td>192.168.10.0/24</td><td>192.168.10.1</td><td>高安全</td></tr>
+        <tr><td>20</td><td>办公区</td><td>192.168.20.0/24</td><td>192.168.20.1</td><td>可上网</td></tr>
+        <tr><td>30</td><td>仓储区</td><td>192.168.30.0/24</td><td>192.168.30.1</td><td>业务内网</td></tr>
+        <tr><td>40</td><td>监控区</td><td>192.168.40.0/24</td><td>192.168.40.1</td><td>视频流</td></tr>
+        <tr><td>50</td><td>服务器</td><td>192.168.50.0/24</td><td>192.168.50.1</td><td>核心数据</td></tr>
+        <tr><td>60</td><td>无线AP</td><td>192.168.60.0/24</td><td>192.168.60.1</td><td>员工/顾客</td></tr>
+    </table>
+</section>
 
-    <!-- 完善页脚信息 -->
-    <footer>
-        <p>大型超市区域网设计方案 | 在线演示地址：https://fuhe1212.github.io/supermarket-network-design/</p>
-        <p>作者：付美蓉 | 学号：20247531</p>
-        <p>设计时间：2026年3月 | 版本：V1.0</p>
-    </footer>
+<section id="device">
+    <h2>设备清单与选型</h2>
+    <table>
+        <tr><th>设备类型</th><th>型号</th><th>数量</th><th>用途</th></tr>
+        <tr><td>核心路由器</td><td>Cisco 4321</td><td>2</td><td>出口、双机热备</td></tr>
+        <tr><td>核心交换机</td><td>华为S5735</td><td>2</td><td>三层交换、万兆</td></tr>
+        <tr><td>汇聚交换机</td><td>华为S5735</td><td>4</td><td>区域汇聚</td></tr>
+        <tr><td>接入交换机</td><td>华为S5720</td><td>12</td><td>终端接入、PoE</td></tr>
+        <tr><td>防火墙</td><td>Hillstone G30</td><td>2</td><td>安全策略</td></tr>
+        <tr><td>无线AP</td><td>华为AP7060</td><td>8</td><td>Wi-Fi覆盖</td></tr>
+    </table>
+</section>
+
+<section id="safe">
+    <h2>安全设计</h2>
+    <h3>1. 边界安全</h3>
+    <p>双防火墙热备，ACL限流，IPS防攻击，关闭高危端口。</p>
+    <h3>2. 内网安全</h3>
+    <p>VLAN隔离，802.1X认证，IP+MAC绑定，DHCP Snooping。</p>
+    <h3>3. 无线安全</h3>
+    <p>WPA3加密，双SSID，顾客网络完全隔离。</p>
+    <h3>4. 数据安全</h3>
+    <p>数据库加密，自动备份，日志审计。</p>
+</section>
+
+<section id="test">
+    <h2>测试方案</h2>
+    <ul class="list">
+        <li>带宽测试：核心≥10G，接入≥1G</li>
+        <li>延迟测试：收银≤10ms，监控≤30ms</li>
+        <li>高可用测试：主设备故障，切换≤50ms</li>
+        <li>安全测试：越权访问被拒绝，攻击被拦截</li>
+        <li>无线测试：覆盖无死角，速率稳定</li>
+    </ul>
+</section>
+
+<section id="summary">
+    <h2>项目总结</h2>
+    <p>本设计完成了大型超市局域网的完整规划，包括需求分析、拓扑设计、IP规划、设备选型、安全策略、测试方案等全部内容。</p>
+    <p>方案满足超市高可靠、高安全、易扩展的核心需求，可直接用于实际工程部署，也符合毕业设计的专业要求。</p>
+</section>
+
+<footer>
+    <p>大型超市局域网设计方案 | 在线演示：https://fuhe1212.github.io/supermarket-network-design/</p>
+    <p>作者：XXX | 学号：XXX | 指导教师：XXX</p>
+    <p>2026年3月 | 毕业设计完整版</p>
+</footer>
+
 </body>
 </html>
-
