@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大型超市区域网设计方案</title>
+    <title>大型超市局域网设计方案</title>
     <style>
         * {
             margin: 0;
@@ -12,221 +12,274 @@
             font-family: "Microsoft YaHei", sans-serif;
         }
         body {
-            background-color: #f5f7fa;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f7f8fa;
             color: #333;
+            line-height: 1.7;
         }
         header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px 0;
             text-align: center;
+            padding: 30px 20px;
+            border-bottom: 3px solid #2c3e50;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #3498db;
+            margin: 30px 0 15px;
+            padding-left: 12px;
+            border-left: 6px solid #3498db;
+        }
+        h3 {
+            font-size: 19px;
+            color: #2980b9;
+            margin: 20px 0 10px;
+        }
+        p {
+            margin: 10px 0;
+            text-indent: 2em;
+            font-size: 16px;
         }
         nav {
-            background-color: #34495e;
-            padding: 15px 0;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
+            background: #2c3e50;
+            padding: 12px;
+            border-radius: 6px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            text-align: center;
         }
         nav a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
+            margin: 0 10px;
+            padding: 6px 10px;
+            display: inline-block;
         }
         nav a:hover {
-            color: #3498db;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+            background: #3498db;
+            border-radius: 4px;
         }
         section {
             background: white;
-            padding: 30px;
-            margin-bottom: 20px;
+            padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin: 20px 0;
+            background: white;
         }
-        th, td {
+        th,td {
             border: 1px solid #ddd;
             padding: 12px;
-            text-align: left;
+            text-align: center;
         }
         th {
-            background-color: #f0f3f5;
+            background: #2c3e50;
+            color: white;
         }
-        .topology-img {
-            max-width: 100%;
-            height: auto;
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .img-box {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .img-box img {
+            max-width: 85%;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-top: 15px;
+            padding: 6px;
+        }
+        .img-box figcaption {
+            margin-top: 8px;
+            color: #666;
+            font-size: 15px;
+        }
+        .list {
+            padding-left: 2.5em;
+            margin: 12px 0;
+        }
+        .list li {
+            margin: 8px 0;
         }
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
-            margin-top: 30px;
+            padding: 30px 20px;
+            border-top: 1px solid #ddd;
+            color: #777;
+            margin-top: 40px;
+        }
+        @media (max-width:768px) {
+            nav a {display:block; margin:6px 0;}
+            .img-box img {max-width:100%}
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>大型超市区域网设计方案</h1>
-        <p>毕业设计（论文）展示网站</p >
-    </header>
-    <nav>
-        <ul>
-            <li><a href=" ">项目概述</a ></li>
-            <li><a href="#topology">网络拓扑</a ></li>
-            <li><a href="#devices">设备清单</a ></li>
-            <li><a href="#ip-plan">IP规划</a ></li>
-            <li><a href="#security">安全设计</a ></li>
-            <li><a href="#testing">测试方案</a ></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <section id="overview">
-            <h2>项目概述</h2>
-            <p>本设计旨在为某大型连锁超市构建一套高效、稳定、安全的区域网络系统。通过合理的拓扑设计、设备选型和安全策略，满足超市日常运营、POS收银、库存管理、视频监控等多业务场景的网络需求。</p >
-            <ul style="margin-top: 15px; padding-left: 20px;">
-                <li>设计目标：高可用性、高安全性、易扩展性</li>
-                <li>覆盖范围：超市卖场、办公区、仓储区、监控中心</li>
-                <li>核心技术：VLAN划分、三层交换、防火墙策略、无线覆盖</li>
-            </ul>
-        </section>
-        <section id="topology">
-            <h2>网络拓扑图</h2>
-            <p>采用“核心层-汇聚层-接入层”三层架构，确保网络的稳定性和可扩展性。</p >
-            <img src="https://via.placeholder.com/1200x600?text=超市区域网拓扑图" alt="网络拓扑图" class="topology-png">
-        </section>
-        <section id="devices">
-            <h2>核心设备清单</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>设备类型</th>
-                        <th>型号</th>
-                        <th>数量</th>
-                        <th>主要功能</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>核心路由器</td>
-                        <td>Cisco ISR 4321</td>
-                        <td>2</td>
-                        <td>Internet接入、路由转发</td>
-                    </tr>
-                    <tr>
-                        <td>核心交换机</td>
-                        <td>Huawei S5735-S48T4X</td>
-                        <td>2</td>
-                        <td>三层交换、VLAN终结</td>
-                    </tr>
-                    <tr>
-                        <td>汇聚交换机</td>
-                        <td>Huawei S5735-L24T4S</td>
-                        <td>4</td>
-                        <td>接入层汇聚、链路聚合</td>
-                    </tr>
-                    <tr>
-                        <td>接入交换机</td>
-                        <td>Huawei S5720S-28X-SI</td>
-                        <td>12</td>
-                        <td>终端接入、PoE供电</td>
-                    </tr>
-                    <tr>
-                        <td>防火墙</td>
-                        <td>Hillstone SG-6000-G30</td>
-                        <td>2</td>
-                        <td>安全策略、入侵防御</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        <section id="ip-plan">
-            <h2>IP地址与VLAN规划</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>VLAN ID</th>
-                        <th>用途</th>
-                        <th>网段</th>
-                        <th>网关</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>VLAN 10</td>
-                        <td>POS收银区</td>
-                        <td>192.168.10.0/24</td>
-                        <td>192.168.10.1</td>
-                    </tr>
-                    <tr>
-                        <td>VLAN 20</td>
-                        <td>办公区</td>
-                        <td>192.168.20.0/24</td>
-                        <td>192.168.20.1</td>
-                    </tr>
-                    <tr>
-                        <td>VLAN 30</td>
-                        <td>仓储区</td>
-                        <td>192.168.30.0/24</td>
-                        <td>192.168.30.1</td>
-                    </tr>
-                    <tr>
-                        <td>VLAN 40</td>
-                        <td>监控区</td>
-                        <td>192.168.40.0/24</td>
-                        <td>192.168.40.1</td>
-                    </tr>
-                    <tr>
-                        <td>VLAN 50</td>
-                        <td>服务器区</td>
-                        <td>192.168.50.0/24</td>
-                        <td>192.168.50.1</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        <section id="security">
-            <h2>安全设计</h2>
-            <ul style="padding-left: 20px;">
-                <li>防火墙策略：禁止外部网络直接访问内部服务器，仅开放必要端口（如80、443）。</li>
-                <li>入侵防御：部署IDS/IPS系统，实时监控网络流量，阻断异常攻击。</li>
-                <li>访问控制：基于VLAN和ACL限制不同区域之间的互访权限。</li>
-                <li>无线安全：采用WPA3加密，MAC地址白名单，禁止访客接入内部网络。</li>
-            </ul>
-        </section>
-        <section id="testing">
-            <h2>测试方案</h2>
-            <ol style="padding-left: 20px;">
-                <li>连通性测试：使用ping和traceroute验证各VLAN之间的路由可达性。</li>
-                <li>带宽测试：使用iperf3测试核心链路的吞吐量，确保满足业务峰值需求。</li>
-                <li>稳定性测试：通过长时间运行，观察网络设备CPU、内存占用及丢包率。</li>
-                <li>安全测试：模拟外部攻击，验证防火墙和入侵防御系统的有效性。</li>
-            </ol>
-        </section>
+
+<header>
+    <h1>大型超市局域网设计方案</h1>
+    <p>毕业设计 | 三层网络架构 | 安全隔离 | 高可用部署</p>
+</header>
+
+<nav>
+    <a href="#overview">项目概述</a>
+    <a href="#requirement">需求分析</a>
+    <a href="#overall-design">总体设计</a>
+    <a href="#highlight">设计亮点</a>
+    <a href="#topo">网络拓扑</a>
+    <a href="#ip">IP规划</a>
+    <a href="#device">设备清单</a>
+    <a href="#safe">安全设计</a>
+    <a href="#test">测试方案</a>
+    <a href="#summary">项目总结</a>
+</nav>
+
+<section id="overview">
+    <h2>项目概述</h2>
+    <p>本项目针对大型超市日常运营的网络需求，完成一套完整的局域网设计方案。设计目标是满足收银、办公、仓储、监控、无线等多业务场景的稳定运行，同时保证网络安全、可扩展、易维护。</p>
+    <p>网络采用**核心层-汇聚层-接入层**三层架构，通过VLAN实现业务隔离，通过双机热备提升可靠性，通过防火墙与访问控制实现安全防护，最终形成一套可直接落地实施的超市网络工程方案。</p>
+</section>
+
+<section id="requirement">
+    <h2>需求分析</h2>
+    <h3>1. 业务需求</h3>
+    <p>大型超市日常运营包含POS收银、办公OA、仓储管理、视频监控、顾客无线等多业务场景，各业务对网络带宽、延迟、安全性要求不同：</p>
+    <ul class="list">
+        <li>POS收银：高可靠、低延迟，禁止外网访问，保障交易安全</li>
+        <li>办公区：流畅访问OA系统、邮件，可有限访问互联网</li>
+        <li>仓储区：与收银区数据互通，实时更新库存，禁止外网访问</li>
+        <li>监控区：高带宽、低延迟，保障视频流稳定传输</li>
+        <li>顾客无线：隔离内网，仅提供互联网访问</li>
+    </ul>
+    <h3>2. 技术需求</h3>
+    <p>网络需满足：可用性≥99.99%，核心层带宽≥10Gbps，接入层≥1Gbps，VLAN隔离业务，双机热备保障核心设备不中断。</p>
+    <h3>3. 安全需求</h3>
+    <p>边界防护、内网隔离、无线加密、数据备份、运维审计五大安全维度，防止数据泄露与非法访问。</p>
+</section>
+
+<section id="overall-design">
+    <h2>总体设计</h2>
+    <h3>1. 设计原则</h3>
+    <ul class="list">
+        <li>高可用性：核心设备双机热备，链路冗余，故障快速切换</li>
+        <li>可扩展性：三层架构，支持后期门店扩容、新增业务</li>
+        <li>安全性：VLAN隔离+ACL+802.1X+WPA3，全场景防护</li>
+        <li>经济性：PoE交换机减少布线成本，设备选型兼顾性能与价格</li>
+    </ul>
+    <h3>2. 三层架构</h3>
+    <p>核心层：核心路由器+核心交换机，负责全网数据转发与互联；<br>
+    汇聚层：汇聚交换机，负责接入层数据汇聚与业务隔离；<br>
+    接入层：接入交换机/无线AP，负责终端接入与PoE供电。</p>
+</section>
+
+<section id="highlight">
+    <h2>设计亮点</h2>
+    <ul class="list">
+        <li>三层架构设计：核心层保障转发效率，汇聚层实现业务隔离，接入层适配多终端类型，层次清晰、可扩展性强</li>
+        <li>高可用保障：核心设备双机热备，链路冗余备份，故障切换时间≤50ms，收银业务零中断</li>
+        <li>精细化安全策略：VLAN隔离+802.1X认证+WPA3加密，兼顾内网、外网、无线全场景安全</li>
+        <li>成本与性能平衡：接入层采用PoE交换机，减少布线成本；核心层采用万兆链路，满足高带宽需求</li>
+        <li>完善的测试体系：覆盖带宽、延迟、高可用、安全四大维度，确保网络长期稳定运行</li>
+    </ul>
+</section>
+
+<section id="topo">
+    <h2>网络拓扑结构</h2>
+    <p>整体网络采用分层设计，设备之间采用冗余链路，保证任意单点故障不影响整体业务。</p>
+    
+    <div class="img-box">
+        <img src="topology.png" alt="网络拓扑图">
+        <figcaption>图1：大型超市局域网整体拓扑图</figcaption>
     </div>
-    <footer>
-        <p>2026 大型超市区域网设计方案 | 毕业设计展示</p >
-    </footer>
+
+    <div class="img-box">
+        <img src="cashier.png" alt="收银区">
+        <figcaption>图2：收银区网络布局</figcaption>
+    </div>
+
+    <div class="img-box">
+        <img src="office.png" alt="办公区">
+        <figcaption>图3：办公区网络布局</figcaption>
+    </div>
+
+    <div class="img-box">
+        <img src="warehouse.png" alt="仓储监控区">
+        <figcaption>图4：仓储与监控区网络布局</figcaption>
+    </div>
+</section>
+
+<section id="ip">
+    <h2>IP与VLAN规划</h2>
+    <table>
+        <tr><th>VLAN</th><th>区域</th><th>网段</th><th>网关</th><th>说明</th></tr>
+        <tr><td>10</td><td>收银区</td><td>192.168.10.0/24</td><td>192.168.10.1</td><td>高安全</td></tr>
+        <tr><td>20</td><td>办公区</td><td>192.168.20.0/24</td><td>192.168.20.1</td><td>可上网</td></tr>
+        <tr><td>30</td><td>仓储区</td><td>192.168.30.0/24</td><td>192.168.30.1</td><td>业务内网</td></tr>
+        <tr><td>40</td><td>监控区</td><td>192.168.40.0/24</td><td>192.168.40.1</td><td>视频流</td></tr>
+        <tr><td>50</td><td>服务器</td><td>192.168.50.0/24</td><td>192.168.50.1</td><td>核心数据</td></tr>
+        <tr><td>60</td><td>无线AP</td><td>192.168.60.0/24</td><td>192.168.60.1</td><td>员工/顾客</td></tr>
+    </table>
+</section>
+
+<section id="device">
+    <h2>设备清单与选型</h2>
+    <table>
+        <tr><th>设备类型</th><th>型号</th><th>数量</th><th>用途</th></tr>
+        <tr><td>核心路由器</td><td>Cisco 4321</td><td>2</td><td>出口、双机热备</td></tr>
+        <tr><td>核心交换机</td><td>华为S5735</td><td>2</td><td>三层交换、万兆</td></tr>
+        <tr><td>汇聚交换机</td><td>华为S5735</td><td>4</td><td>区域汇聚</td></tr>
+        <tr><td>接入交换机</td><td>华为S5720</td><td>12</td><td>终端接入、PoE</td></tr>
+        <tr><td>防火墙</td><td>Hillstone G30</td><td>2</td><td>安全策略</td></tr>
+        <tr><td>无线AP</td><td>华为AP7060</td><td>8</td><td>Wi-Fi覆盖</td></tr>
+    </table>
+</section>
+
+<section id="safe">
+    <h2>安全设计</h2>
+    <h3>1. 边界安全</h3>
+    <p>双防火墙热备，ACL限流，IPS防攻击，关闭高危端口。</p>
+    <h3>2. 内网安全</h3>
+    <p>VLAN隔离，802.1X认证，IP+MAC绑定，DHCP Snooping。</p>
+    <h3>3. 无线安全</h3>
+    <p>WPA3加密，双SSID，顾客网络完全隔离。</p>
+    <h3>4. 数据安全</h3>
+    <p>数据库加密，自动备份，日志审计。</p>
+</section>
+
+<section id="test">
+    <h2>测试方案</h2>
+    <ul class="list">
+        <li>带宽测试：核心≥10G，接入≥1G</li>
+        <li>延迟测试：收银≤10ms，监控≤30ms</li>
+        <li>高可用测试：主设备故障，切换≤50ms</li>
+        <li>安全测试：越权访问被拒绝，攻击被拦截</li>
+        <li>无线测试：覆盖无死角，速率稳定</li>
+    </ul>
+</section>
+
+<section id="summary">
+    <h2>项目总结</h2>
+    <p>本设计完成了大型超市局域网的完整规划，包括需求分析、拓扑设计、IP规划、设备选型、安全策略、测试方案等全部内容。</p>
+    <p>方案满足超市高可靠、高安全、易扩展的核心需求，可直接用于实际工程部署，也符合毕业设计的专业要求。</p>
+</section>
+
+<footer>
+    <p>大型超市局域网设计方案 | 在线演示：https://fuhe1212.github.io/supermarket-network-design/</p>
+    <p>作者：XXX | 学号：XXX | 指导教师：XXX</p>
+    <p>2026年3月 | 毕业设计完整版</p>
+</footer>
+
 </body>
 </html>
